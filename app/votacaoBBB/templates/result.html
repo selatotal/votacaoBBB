@@ -1,0 +1,40 @@
+<html>
+<head>
+	<meta charset="utf-8" />
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='_css/pool_result.css') }}" />
+</head>
+<body>
+	<div id="main">
+		<div id="top">
+			<div id="corner"></div>
+			<div id="header"><span class="logo" />&nbsp;</span><span class="vertical-center">QUEM DEVE SER ELIMINADO?</span></div>
+			<div id="line">
+				<hr class="style-one" /><hr class="style-one" /><hr class="style-one" /><hr class="style-one" />
+			</div>
+			<div id="response">
+				<span class="bold">Parabéns!</span> Seu voto para <span class="bold">Participante 1</span> foi enviado com sucesso.
+			</div>
+		</div>
+		<div id="contestant1" class="contestant">
+			<div class="photo"></div>
+		</div>
+	    <div id="donutchart"></div>
+		<div id="contestant2" class="contestant">
+			<div class="photo"></div>
+		</div>
+
+		<div id="remaining">FALTAM<br/><span id="remainingTime"></span><br />PARA ENCERRAR A VOTAÇÃO</div>
+	</div>
+
+	<script type="text/javascript" src="{{ url_for('static', filename='_js/countdown.min.js') }}"></script>
+	<script type="text/javascript" src="{{ url_for('static', filename='_js/contador.js') }}"></script>
+<script type="text/javascript">
+var dataset = [
+{% for entry in entries %}
+  { label: '{{ entry.name }}', count: {{ entry.votes }} }, 
+{% endfor %}
+];
+</script>
+	<script src="http://d3js.org/d3.v3.min.js"></script>
+	<script type="text/javascript" src="{{ url_for('static', filename='_js/graph.js') }}"></script>
+</body>
