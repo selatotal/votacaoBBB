@@ -29,6 +29,12 @@ def connect_db():
 def before_request():
 	g.db = connect_db()
 
+@app.teardown_appcontext
+def close_connection(exception):
+	db = getattr(g, 'sqlite_db')
+	if db is not None:
+		db.close()
+
 # Update History
 def update_history(participant_id):
 	actual_hour = datetime.datetime.now().strftime('%Y%m%d%H')
