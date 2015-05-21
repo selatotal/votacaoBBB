@@ -23,7 +23,11 @@ voting = function(){
 	xmlhttp = new XMLHttpRequest();
 	xmlhttp.onreadystatechange=function(){
 		if (xmlhttp.readyState==4 && xmlhttp.status==200){
-			document.getElementById("buttom").innerHTML="Obrigado";
+			response = JSON.parse(xmlhttp.responseText);
+			if (typeof(response[0]['id']) == undefined){
+				document.getElementById("buttom").innerHTML="Erro";
+			}
+			window.location = '/results';
 		}
 	}
 	xmlhttp.open("GET", "/vote/"+participantSelected, true);

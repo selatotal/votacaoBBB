@@ -12,6 +12,14 @@ var executaD3 = function(d3, dataset) {
         var radius = Math.min(width, height) / 2;
         var donutWidth = 40
 
+        /*
+         * Cheching initial votes
+         */
+        if (dataset[0].count === 0 && dataset[1].count === 0){
+          dataset[0].count = 1;
+          dataset[1].count = 1;
+        }
+
         var color = d3.scale.ordinal()
           .range(['#ff9516','#c6c6c6']);
 

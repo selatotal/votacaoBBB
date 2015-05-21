@@ -1,8 +1,9 @@
 # Imports
 import sqlite3
 import datetime
+import json
 from flask import Flask, request, session, g, redirect, url_for, \
-     abort, render_template, flash
+     abort, render_template, flash, jsonify
 
 # Create Application
 app = Flask(__name__)
@@ -20,10 +21,28 @@ def init_db():
 		db.cursor().executescript(f.read())
 	db.commit()
 
+def make_dicts(cursor, row):
+	return dict((cursor.description[idx][0], value) for idx, value in enumerate(row))
+
 def connect_db():
 	rv = sqlite3.connect(app.config['DATABASE'])
-	rv.row_factory = sqlite3.Row
+	rv.row_factory = make_dicts
 	return rv
+
+def list_to_dic(list):
+	my_dict = {}
+	index = 0
+	for item in list:
+		my_dict[index] = item
+		index+=1
+	return my_dict
+
+def query_db(query, args=(), one=False):
+	cur = get_db().execute(query, args)
+	rv = cur.fetchall()
+	cur.close()
+	return (rv[0] if rv else None) if one else rv
+
 
 @app.before_request
 def before_request():
@@ -60,7 +79,8 @@ def vote(participant_id):
 		[participant_id])
 	update_history(participant_id)
 	g.db.commit()
-	return redirect(url_for('results'))
+	entries = query_db('select * from participants')	
+	return jsonify(list_to_dic(entries));
 
 # Results
 @app.route('/results')
