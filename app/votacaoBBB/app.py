@@ -66,10 +66,10 @@ def update_history(participant_id):
 	id_hora = query_db('select id from hour_votings where date_hour = ? and participant_id = ?',
 		[actual_hour, participant_id])
 	if id_hora is not None:
-		query_db('update hour_votings set votes = votes + 1 where date_hour = ? and participant_id = ?',
+		get_db().execute('update hour_votings set votes = votes + 1 where date_hour = ? and participant_id = ?',
 			[actual_hour, participant_id])
 	else:
-		query_db('insert into hour_votings (date_hour, participant_id, votes) values(?, ?, 1)',
+		get_db().execute('insert into hour_votings (date_hour, participant_id, votes) values(?, ?, 1)',
 			[actual_hour, participant_id])
 
 
@@ -90,10 +90,10 @@ def vote(participant_id):
 		return render_template('main.html')
 	else:
 		#Update votes and history
-		query_db('update participants set votes = votes + 1 where id = ?',
+		get_db().execute('update participants set votes = votes + 1 where id = ?',
 			[participant_id])
 		update_history(participant_id)
-		g.db.commit()
+		get_db().commit()
 		entries = query_db('select * from participants')
 		if request.method == 'GET':
 			return jsonify(list_to_dic(entries))

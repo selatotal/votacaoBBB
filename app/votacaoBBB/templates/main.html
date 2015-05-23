@@ -6,18 +6,6 @@
 	<div id="main">
 		<div id="top">
 			<div id="corner"></div>
-			{% with messages = get_flashed_messages() %}
-			{% if messages %}
-			<div id="flashes">
-				<ul>
-					{% for message in messages %}
-					<li>{{ message }}</li>
-					{% endfor %}
-				</ul>
-			</div>
-			{% endif %}
-			{% endwith %}
-
 			<div id="header"><span class="logo" />&nbsp;</span><span class="vertical-center">QUEM DEVE SER ELIMINADO?</span></div>
 			<div id="line">
 				<hr class="style-one" /><hr class="style-one" /><hr class="style-one" /><hr class="style-one" />
@@ -49,5 +37,13 @@
 		</div>
 	</div>
 	<script type="text/javascript" src="{{ url_for('static', filename='_js/voting.js') }}"></script>
-
+	{% with messages = get_flashed_messages() %}
+	{% if messages %}
+	<script type="text/javascript">
+		{% for message in messages %}
+			window.alert('{{ message }}');
+		{% endfor %}
+	{% endif %}
+	{% endwith %}
+	</script>
 </body>
