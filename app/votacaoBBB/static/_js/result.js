@@ -1,10 +1,14 @@
-var pad = function (number){
+/*
+ * Define counter
+ */
+
+var pad = function(number){
 	var str = ''+number;
 	var myPad = '00'
 	return myPad.substring(0, myPad.length - str.length) + str;
 }
 
-function myCounter(){
+var myCounter = function(){
 
 	var countdownType = countdown.HOURS | countdown.MINUTES | countdown.SECONDS;
 	countdown.setLabels(
@@ -20,6 +24,17 @@ function myCounter(){
 		countdownType
 		);
 
+};
+
+/**
+ * Function to onclick close image
+ */
+var goHome = function(){
+	window.location = "/";
 }
+
+/*
+ * Start counter
+ */
 
 myCounter();

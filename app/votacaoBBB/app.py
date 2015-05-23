@@ -1,13 +1,17 @@
+# coding=utf-8
+
 # Imports
 import sqlite3
 import datetime
 import json
 from flask import Flask, request, session, g, redirect, url_for, \
      abort, render_template, flash, jsonify
+from flask_recaptcha import ReCaptcha
 
 # Create Application
 app = Flask(__name__)
 app.config.from_envvar('VOTACAOBBB_SETTINGS', silent=True)
+recaptcha = ReCaptcha(app)
 
 # Connect Database
 def get_db():
@@ -29,6 +33,13 @@ def connect_db():
 	rv.row_factory = make_dicts
 	return rv
 
+def query_db(query, args=(), one=False):
+	cur = get_db().execute(query, args)
+	rv = cur.fetchall()
+	cur.close()
+	return (rv[0] if rv else None) if one else rv
+
+# Convert a list to a dictionary
 def list_to_dic(list):
 	my_dict = {}
 	index = 0
@@ -36,12 +47,6 @@ def list_to_dic(list):
 		my_dict[index] = item
 		index+=1
 	return my_dict
-
-def query_db(query, args=(), one=False):
-	cur = get_db().execute(query, args)
-	rv = cur.fetchall()
-	cur.close()
-	return (rv[0] if rv else None) if one else rv
 
 
 @app.before_request
@@ -57,13 +62,13 @@ def close_connection(exception):
 # Update History
 def update_history(participant_id):
 	actual_hour = datetime.datetime.now().strftime('%Y%m%d%H')
-	id_hora = g.db.execute('select id from hour_votings where date_hour = ? and participant_id = ?',
+	id_hora = query_db('select id from hour_votings where date_hour = ? and participant_id = ?',
 		[actual_hour, participant_id])
 	if id_hora is not None:
-		g.db.execute('update hour_votings set votes = votes + 1 where date_hour = ? and participant_id = ?',
+		query_db('update hour_votings set votes = votes + 1 where date_hour = ? and participant_id = ?',
 			[actual_hour, participant_id])
 	else:
-		g.db.execute('insert into hour_votings (date_hour, participant_id, votes) values(?, ?, 1)',
+		query_db('insert into hour_votings (date_hour, participant_id, votes) values(?, ?, 1)',
 			[actual_hour, participant_id])
 
 
@@ -73,19 +78,31 @@ def home():
 	return render_template('main.html')
 
 # Voting
-@app.route('/vote/<int:participant_id>')
+@app.route('/vote/<int:participant_id>', methods = [ 'GET', 'POST'])
 def vote(participant_id):
-	g.db.execute('update participants set votes = votes + 1 where id = ?',
-		[participant_id])
-	update_history(participant_id)
-	g.db.commit()
-	entries = query_db('select * from participants')	
-	return jsonify(list_to_dic(entries));
+	# Verify valid ID
+	if participant_id not in range(1,3):
+		flash("Escolha um participante")
+		return render_template('main.html')
+	elif not recaptcha.verify():
+		flash(u"Confirme que você é um humano!")
+		return render_template('main.html')
+	else:
+		#Update votes and history
+		query_db('update participants set votes = votes + 1 where id = ?',
+			[participant_id])
+		update_history(participant_id)
+		g.db.commit()
+		entries = query_db('select * from participants')
+		if request.method == 'GET':
+			return jsonify(list_to_dic(entries))
+		else:
+			return render_template('result.html', entries = entries, participant_name = entries[participant_id-1]['name'] )
 
-# Results
+# Just show the Results
 @app.route('/results')
 def results():
-	entries = g.db.execute('select * from participants')
+	entries = query_db('select * from participants')
 	return render_template('result.html', entries = entries)
 
 

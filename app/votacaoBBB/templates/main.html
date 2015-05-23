@@ -6,6 +6,18 @@
 	<div id="main">
 		<div id="top">
 			<div id="corner"></div>
+			{% with messages = get_flashed_messages() %}
+			{% if messages %}
+			<div id="flashes">
+				<ul>
+					{% for message in messages %}
+					<li>{{ message }}</li>
+					{% endfor %}
+				</ul>
+			</div>
+			{% endif %}
+			{% endwith %}
+
 			<div id="header"><span class="logo" />&nbsp;</span><span class="vertical-center">QUEM DEVE SER ELIMINADO?</span></div>
 			<div id="line">
 				<hr class="style-one" /><hr class="style-one" /><hr class="style-one" /><hr class="style-one" />
@@ -28,9 +40,12 @@
 			</div>
 		</div>
 		<div id="bottom">
-			<div id="buttom">
-				Envie seu voto agora
-			</div>
+			<form name="vote" method="POST" onsubmit="return onSubmitForm();" />
+				{{ recaptcha }}
+				<div id="buttom">
+					<input type="submit" name="submit" value="Envie seu voto agora" id="submit" />
+				</div>
+			</form>
 		</div>
 	</div>
 	<script type="text/javascript" src="{{ url_for('static', filename='_js/voting.js') }}"></script>

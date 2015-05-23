@@ -85,7 +85,7 @@ html body {
 
 .photo_hover {
 	border-color: orange;
-	border-width: 2px;
+	border-width: 4px;
 }
 
 #contestant1 .photo {
@@ -161,25 +161,38 @@ hr.style-one {
 }
 
 #buttom {
+
+	margin: 22px 48px;
+	float: right;
+	position: relative;
+
+}
+
+#submit {
 	background: -webkit-linear-gradient(#1094fc, #0061af); /* For Safari 5.1 to 6.0 */
 	background: -o-linear-gradient(#1094fc, #0061af); /* For Opera 11.1 to 12.0 */
 	background: -moz-linear-gradient(#1094fc, #0061af); /* For Firefox 3.6 to 15 */
-	background: linear-gradient(#1094fc, #0061af); /* Standard syntax */
+	background: linear-gradient(#1094fc, #0061af); /* Standard syntax */	
+
 	width: 200px;
 	height: 40px;
 	color: #ffffff;
-	line-height: 48px;
 	vertical-align: middle;
 	text-align: center;
 	font-size:15px;
-
-	top: 25%;
-	margin: 0 auto;
-	position: relative;
 
 	border-style: solid;
 	border-width: 1px;
 	border-radius: 5px;
 	border-color: blue;
 
+}
+
+.g-recaptcha {
+	width: 304px;
+	height: 88px;
+	vertical-align: middle;
+	clear: none;
+	float: left;
+	margin: 5px;
 }

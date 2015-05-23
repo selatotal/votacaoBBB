@@ -2,17 +2,22 @@
 <head>
 	<meta charset="utf-8" />
 	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='_css/pool_result.css') }}" />
+
 </head>
 <body>
 	<div id="main">
 		<div id="top">
-			<div id="corner"></div>
+			<div id="corner" onclick="goHome()"></div>
 			<div id="header"><span class="logo" />&nbsp;</span><span class="vertical-center">QUEM DEVE SER ELIMINADO?</span></div>
 			<div id="line">
 				<hr class="style-one" /><hr class="style-one" /><hr class="style-one" /><hr class="style-one" />
 			</div>
 			<div id="response">
-				<span class="bold">Parabéns!</span> Seu voto para <span class="bold">Participante 1</span> foi enviado com sucesso.
+				{% if participant_name %}
+				<span class="bold">Parabéns!</span> Seu voto para <span class="bold">{{ participant_name }}</span> foi enviado com sucesso.
+				{% else %}
+				Resultado parcial
+				{% endif %}
 			</div>
 		</div>
 		<div id="contestant1" class="contestant">
@@ -24,10 +29,12 @@
 		</div>
 
 		<div id="remaining">FALTAM<br/><span id="remainingTime"></span><br />PARA ENCERRAR A VOTAÇÃO</div>
+		<div id="percentual1" class="percentual">10%</div>
+		<div id="percentual2" class="percentual">90%</div>
 	</div>
 
 	<script type="text/javascript" src="{{ url_for('static', filename='_js/countdown.min.js') }}"></script>
-	<script type="text/javascript" src="{{ url_for('static', filename='_js/contador.js') }}"></script>
+	<script type="text/javascript" src="{{ url_for('static', filename='_js/result.js') }}"></script>
 <script type="text/javascript">
 var dataset = [
 {% for entry in entries %}

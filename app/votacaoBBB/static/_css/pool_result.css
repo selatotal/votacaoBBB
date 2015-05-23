@@ -199,3 +199,22 @@ hr.style-one {
 	left: 239px;
 	text-align: center;
 }
+
+.percentual {
+	width: 40;
+	height: 40;
+	position: absolute;
+	margin: 0 auto;
+	z-index: 10000;
+	bottom: -8px;
+	font-size: 1.2em;
+	color: #FFFFFF;
+}
+
+#percentual1 {
+	left: 200px;
+}
+
+#percentual2 {
+	left: 193px;
+}

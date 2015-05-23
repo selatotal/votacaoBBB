@@ -49,7 +49,7 @@ var executaD3 = function(d3, dataset) {
           .attr('d', arc)
           .attr('fill', function(d, i) { 
             return color(d.data.label);
-          });
+          })
 
       };
 
