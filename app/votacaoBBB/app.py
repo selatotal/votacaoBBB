@@ -55,9 +55,10 @@ def before_request():
 
 @app.teardown_appcontext
 def close_connection(exception):
-	db = getattr(g, 'sqlite_db')
-	if db is not None:
-		db.close()
+	if hasattr(g, 'sqlite3_db'):
+		db = getattr(g, 'sqlite_db')
+		if db is not None:
+			db.close()
 
 # Update History
 def update_history(participant_id):
