@@ -54,8 +54,16 @@ var putPercentuals = function(){
     percentual1 = Math.floor((dataset[0].count/(dataset[0].count + dataset[1].count) * 100));
     var percentual2 = 100 - percentual1;
   }
-  document.getElementById('percentual1').innerHTML = percentual1 + "%";
-  document.getElementById('percentual2').innerHTML = percentual2 + "%";
+  if (percentual1 == 0){
+    document.getElementById('percentual2').classList.add('percentualCenter')
+    document.getElementById('percentual2').innerHTML = "100%";
+  } else if (percentual2 == 0){
+    document.getElementById('percentual1').classList.add('percentualCenter')
+    document.getElementById('percentual1').innerHTML = "100%";
+  } else {
+    document.getElementById('percentual1').innerHTML = percentual1 + "%";
+    document.getElementById('percentual2').innerHTML = percentual2 + "%";    
+  }
 
 }
 

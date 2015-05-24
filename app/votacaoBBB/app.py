@@ -63,14 +63,22 @@ def close_connection(exception):
 # Update History
 def update_history(participant_id):
 	actual_hour = datetime.datetime.now().strftime('%Y%m%d%H')
-	id_hora = query_db('select id from hour_votings where date_hour = ? and participant_id = ?',
-		[actual_hour, participant_id])
-	if id_hora is not None:
-		get_db().execute('update hour_votings set votes = votes + 1 where date_hour = ? and participant_id = ?',
-			[actual_hour, participant_id])
+	id_hora = query_db('select id from hour_votings where date_hour = ?',
+		[actual_hour])
+
+	if (participant_id == 1):
+		participant1_votes = 1
+		participant2_votes = 0
+	elif (participant_id == 2):
+		participant1_votes = 0
+		participant2_votes = 1
+
+	if not id_hora:
+		get_db().execute('insert into hour_votings (date_hour, participant1_votes, participant2_votes) values(?, ?, ?)',
+			[actual_hour, participant1_votes, participant2_votes])
 	else:
-		get_db().execute('insert into hour_votings (date_hour, participant_id, votes) values(?, ?, 1)',
-			[actual_hour, participant_id])
+		get_db().execute('update hour_votings set participant1_votes = participant1_votes + ?, participant2_votes = participant2_votes + ? where date_hour = ?',
+			[participant1_votes, participant2_votes, actual_hour])
 
 
 # Home
@@ -106,6 +114,33 @@ def results():
 	entries = query_db('select * from participants')
 	return render_template('result.html', entries = entries)
 
+# Admin login form
+@app.route('/admin')
+def admin():
+	return render_template('admin_index.html')
+
+# Admin logout
+@app.route('/admin/logout')
+def admin_logout():
+	session.pop('username', None)
+	return redirect(url_for('admin'))
+
+# Admin login e homepage
+@app.route('/admin/home', methods = [ 'GET','POST' ])
+def admin_home():
+	if 'username' not in session:
+		if (request.method == 'POST') and (request.form['username'] == app.config['USERNAME']) and (request.form['password'] == app.config['PASSWORD']):
+			session['username'] = 'admin'
+		else:
+			session.pop('username', None)
+			return render_template('admin_index.html')
+
+	# Get logout data
+	total_votes = query_db("select sum(votes) 'total' from participants")
+	results = query_db("select id, name, votes, ((votes/?)*100.0) 'perc' from participants",
+		[ total_votes[0]['total']*1.0 ] )
+	by_hour = query_db('select * from hour_votings order by date_hour')
+	return render_template('admin_home.html', total_votes = total_votes[0]['total'] , results = results, by_hour = by_hour)
 
 # Start Server
 if __name__ == '__main__':

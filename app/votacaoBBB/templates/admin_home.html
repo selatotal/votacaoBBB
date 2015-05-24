@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="/favicon.ico">
+
+    <title>Votação BBB - Admin</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="{{ url_for('static', filename='bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="{{ url_for('static', filename='_css/admin.css') }}" rel="stylesheet">
+
+  </head>
+  <body>
+    <nav class="navbar navbar-default navbar-fixed-top">
+      <div class="container-fluid">
+        <div class="collapse navbar-collapse">
+          <ul class="nav navbar-nav navbar-left">
+            <li><a class="navbar-brand" href="#">BBB</a></li>
+            <li><a href="#resultado">Resultado</a></li>
+            <li><a href="#porhora">Por Hora</a></li>
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="/admin/logout">Logout</a>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <div class="container">
+      <a name="resultado"></a>
+      <h1>Resultado</h1>
+
+      {% for entry in results %}
+      <div class="panel panel-default" style="height: 55px">
+        {{entry.name}}
+        <div class="progress" style="width: 95%; margin: 0 auto;">
+          <div class="progress-bar" role="progressbar" aria-valuenow="{{ entry.votes }}" aria-valuemin="0" aria-valuemax="{{ total_votes.total }}" style="width: {{ entry.perc }}%">{{entry.votes}} - {{'%0.2f' % entry.perc}}%
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+
+      <a name="porhora"></a>
+      <h2>Votos por hora</h1>
+
+      <div class="panel panel-default">
+        <table class="table">
+          <tr>
+            <th>Hora</th>
+            <th>Participante 1</th>
+            <th>Participante 2</th>
+          </tr>
+          {% for entry in by_hour %}
+          <tr>
+            <td>{{ "%s/%s/%s %s:00" % (entry.date_hour[6:8], entry.date_hour[4:6], entry.date_hour[0:4], entry.date_hour[8:10]) }}</td>
+            <td>{{ entry.participant1_votes }}</td>
+            <td>{{ entry.participant2_votes }}
+          </tr>
+          {% endfor %}
+        </table>
+      </div>
+
+    </div>
+  </body>
+</html>

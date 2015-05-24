@@ -22,9 +22,8 @@ drop table if exists hour_votings;
 create table hour_votings (
     id integer primary key autoincrement,
     date_hour text not null,
-    participant_id integer not null,
-    votes integer,
-	foreign key(participant_id) references participants(id)
+    participant1_votes integer not null,
+    participant2_votes integer not null
 );
 
 insert into participants values (1, 'Participante 1', 0);
