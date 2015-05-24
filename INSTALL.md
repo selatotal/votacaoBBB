@@ -33,8 +33,12 @@ A explicação das chaves de configuração podem ser verificadas abaixo
 
 ### URLs de Acesso
 
+Página de votação: http://52.5.97.186/
+Página de administração: http://52.5.97.186/admin
+
 Após o servidor está no ar, a página de votação pode ser acessada diretamente na raiz do servidor.
 Para a página de administração, pode ser acessada através da URL relativa /admin
 O usuário e senha padrão podem ser consultados no arquivo de configuração (por padrão é admin/admin)
+
 
 
