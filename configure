@@ -1,0 +1,13 @@
+## Install dependencies
+apt-get install -y git sqlite3 python python-pip
+
+## Install Flask
+pip install -y flask flask-recaptcha
+pip install flask-recaptcha
+
+## Application Setup
+sqlite3 app/votacaoBBB/db/bbbvoting.db < app/votacaoBBB/db/schema.sql
+
+###Execução do Servidor
+cd app/votacaoBBB
+run.sh
