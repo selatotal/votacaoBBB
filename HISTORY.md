@@ -136,3 +136,8 @@ Processing:     4  495 127.4    482    1131
 Waiting:        4  495 127.3    482    1125
 Total:          8  496 127.3    483    1132
 
+###Configuração de dependencias
+sudo ./configure
+
+###Execução do Servidor
+sudo ./run.sh

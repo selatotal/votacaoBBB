@@ -1,4 +1,4 @@
 #!/bin/bash
 export VOTACAOBBB_SETTINGS="config/app.cfg"
-cd app/VotacaoBBB
+cd app/votacaoBBB
 python app.py

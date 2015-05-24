@@ -144,4 +144,4 @@ def admin_home():
 
 # Start Server
 if __name__ == '__main__':
-	app.run(port = app.config['PORT'])
+	app.run(host = app.config['IP_BIND'], port = app.config['PORT'])
