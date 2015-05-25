@@ -25,6 +25,10 @@ html body {
 	font-family: ProximaNova-Light; /*,arial,helvetica,sans-serif;*/
 	-webkit-font-smoothing: antialised;
 }
+	
+.sprite {
+	background: url('../_img/sprite.png') no-repeat;	
+}
 
 #main {
 	width: 615px;
@@ -50,7 +54,6 @@ html body {
 #header {
 	width: 100%;
 	height: 45px;
-	display: block;
 	font-size: 26px;
 	text-align: center;
 	line-height: 45px;
@@ -75,7 +78,7 @@ html body {
 	width: 210px;
 	height: 290px;
 	display: block;
-	bottom: 0px;
+	bottom: 0;
 	position: absolute;
 }
 
@@ -89,15 +92,14 @@ html body {
 }
 
 #contestant1 .results{
-	left: 0px;
+	left: 0;
 }
 
 #contestant2 .results{
-	right: 0px;
+	right: 0;
 }
 
 .photo {
-	background: url('../_img/sprite.png') no-repeat;
 	border-style: solid;
 	border-width: 1px;
 	border-radius: 3px;
@@ -112,7 +114,6 @@ html body {
 }
 
 .photoresults {
-	background: url('../_img/sprite.png') no-repeat;
 	width: 210px;
 	height: 290px;
 }
@@ -141,7 +142,6 @@ html body {
 }
 
 #corner {
-	background: url('../_img/sprite.png') no-repeat;
 	background-position: 0 -100;
 	position: absolute;
 	top: -20px;
@@ -157,7 +157,6 @@ html body {
 }
 
 .logo {
-	background: url('../_img/sprite.png') no-repeat;	
 	width: 40px;
 	height: 40px;
 	display: inline-block;
@@ -187,7 +186,7 @@ html body {
 	font-size: 18px;
 }
 
-hr.style-one {
+.style-one {
 	border-top: 1px dotted #8c8b8b;
 	margin: 0 0 0.5 0;
 }
@@ -207,6 +206,7 @@ hr.style-one {
 }
 
 #submit {
+	background: -webkit-gradient(#1094fc, #0061af); /* For Old Webkit */
 	background: -webkit-linear-gradient(#1094fc, #0061af); /* For Safari 5.1 to 6.0 */
 	background: -o-linear-gradient(#1094fc, #0061af); /* For Opera 11.1 to 12.0 */
 	background: -moz-linear-gradient(#1094fc, #0061af); /* For Firefox 3.6 to 15 */
@@ -240,7 +240,7 @@ hr.style-one {
 	height: 260px;
 	position: absolute;
 	margin: 0 auto;
-	bottom: -69px;
+	bottom: -70px;
 	left: 180px;
 	z-index: 9000;
 }
