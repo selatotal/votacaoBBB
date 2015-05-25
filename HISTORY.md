@@ -1,3 +1,18 @@
+## Exercícios de Lógica de Programação
+* Escolhi fazer em Java porque já tinha o ambiente pronto.
+* Para compilar, basta realizar a compilação, conforme abaixo:
+```
+javac Collatz.java SubCadeia.java
+```
+* Para executar, basta executar a classe escolhida, conforme abaixo:
+```
+java Collatz
+```
+
+```
+java SubCadeia
+```
+
 ## Arquitetura
 
 ===============================
