@@ -28,7 +28,6 @@ html body {
 
 #main {
 	width: 615px;
-	height: 600px;
 	border-style: solid;
 	border-width: 6px;
 	border-radius: 5px;
@@ -38,7 +37,14 @@ html body {
 	margin-left: auto;
 	clear: both;
 	top: 40px;
+}
 
+.home {
+	height: 600px;	
+}
+
+.results {
+	height: 440px;
 }
 
 #header {
@@ -65,12 +71,29 @@ html body {
 	display: block;
 }
 
+.contestantresults {
+	width: 210px;
+	height: 290px;
+	display: block;
+	bottom: 0px;
+	position: absolute;
+}
+
+
 #contestant1 {
 	float: left;
 }
 
 #contestant2 {
 	float: right;
+}
+
+#contestant1 .results{
+	left: 0px;
+}
+
+#contestant2 .results{
+	right: 0px;
 }
 
 .photo {
@@ -88,12 +111,27 @@ html body {
 	border-width: 4px;
 }
 
+.photoresults {
+	background: url('../_img/sprite.png') no-repeat;
+	width: 210px;
+	height: 290px;
+}
+
+
 #contestant1 .photo {
 	background-position: -10 -150;
 }
 
 #contestant2 .photo {
 	background-position: -340 -150;
+}
+
+#contestant1 .photoresults {
+	background-position: -50 -150;
+}
+
+#contestant2 .photoresults {
+	background-position: -350 -150;
 }
 
 #bottom {
@@ -195,4 +233,62 @@ hr.style-one {
 	clear: none;
 	float: left;
 	margin: 5px;
+}
+
+#donutchart {
+	width: 260px; 
+	height: 260px;
+	position: absolute;
+	margin: 0 auto;
+	bottom: -69px;
+	left: 180px;
+	z-index: 9000;
+}
+
+#response {
+	font-size: 1.2em;
+	text-align: center;
+	margin: 43 0 0 0;
+}
+
+#remaining {
+
+	width: 140;
+	height: 140;
+	position: absolute;
+	margin: 0 auto;
+	z-index: 10000;
+	bottom: -30px;
+	left: 239px;
+	color: #c6c6c6;
+	font-size: 0.7em;
+	text-align: center;
+}
+
+#remainingTime {
+	color: orange;
+	font-size: 2.5em;
+}
+
+.percentual {
+	width: 40;
+	height: 40;
+	position: absolute;
+	margin: 0 auto;
+	z-index: 10000;
+	bottom: -8px;
+	font-size: 1.2em;
+	color: #FFFFFF;
+}
+
+.percentualCenter {
+	bottom: 78px;
+}
+
+#percentual1 {
+	left: 191px;
+}
+
+#percentual2 {
+	left: 395px;
 }

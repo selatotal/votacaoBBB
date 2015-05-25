@@ -1,11 +1,12 @@
 <html>
 <head>
 	<meta charset="utf-8" />
-	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='_css/pool_result.css') }}" />
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='_css/pool.css') }}" />
+	<title>BBB - Votação</title>
 
 </head>
 <body>
-	<div id="main">
+	<div id="main" class="results">
 		<div id="top">
 			<div id="corner" onclick="goHome()"></div>
 			<div id="header"><span class="logo" />&nbsp;</span><span class="vertical-center">QUEM DEVE SER ELIMINADO?</span></div>
@@ -22,12 +23,12 @@
 				{% endif %}
 			</div>
 		</div>
-		<div id="contestant1" class="contestant">
-			<div class="photo"></div>
+		<div id="contestant1" class="contestantresults, results">
+			<div class="photoresults"></div>
 		</div>
 	    <div id="donutchart"></div>
-		<div id="contestant2" class="contestant">
-			<div class="photo"></div>
+		<div id="contestant2" class="contestantresults, results">
+			<div class="photoresults"></div>
 		</div>
 
 		{% if voting_enabled %}
