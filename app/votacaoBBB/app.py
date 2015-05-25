@@ -80,15 +80,29 @@ def update_history(participant_id):
 		get_db().execute('update hour_votings set participant1_votes = participant1_votes + ?, participant2_votes = participant2_votes + ? where date_hour = ?',
 			[participant1_votes, participant2_votes, actual_hour])
 
+# Verify if voting is ended
+def is_voting_enabled():
+	actual_hour = datetime.datetime.now().strftime('%Y%m%d%H%M')
+	if int(actual_hour) >= int(app.config['END_VOTING']):
+		return False
+	return app.config['END_VOTING']
 
 # Home
 @app.route('/')
 def home():
+	if not is_voting_enabled():
+		entries = query_db('select * from participants')
+		return render_template('result.html', entries = entries, voting_enabled=False)
 	return render_template('main.html')
 
 # Voting
 @app.route('/vote/<int:participant_id>', methods = [ 'GET', 'POST'])
 def vote(participant_id):
+	voting_enabled = is_voting_enabled()
+	if not voting_enabled:
+		entries = query_db('select * from participants')
+		return render_template('result.html', entries = entries, voting_enabled=False)
+
 	# Verify valid ID
 	if participant_id not in range(1,3):
 		flash("Escolha um participante")
@@ -106,13 +120,14 @@ def vote(participant_id):
 		if request.method == 'GET':
 			return jsonify(list_to_dic(entries))
 		else:
-			return render_template('result.html', entries = entries, participant_name = entries[participant_id-1]['name'] )
+			return render_template('result.html', entries = entries, participant_name = entries[participant_id-1]['name'], voting_enabled=voting_enabled )
 
 # Just show the Results
 @app.route('/results')
 def results():
 	entries = query_db('select * from participants')
-	return render_template('result.html', entries = entries)
+	voting_enabled = is_voting_enabled()
+	return render_template('result.html', entries = entries, voting_enabled = voting_enabled)
 
 # Admin login form
 @app.route('/admin')

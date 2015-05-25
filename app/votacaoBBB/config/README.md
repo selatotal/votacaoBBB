@@ -45,3 +45,6 @@ Site key do recaptcha utilizado para exibição do RECAPTCHA na página de vota�
 
 ### RECAPTCHA_SECRET_KEY
 Secret key do recaptcha utilizado para exibição do RECAPTCHA na página de votação. Mais detalhes em https://developers.google.com/recaptcha/docs/start
+
+### END_VOTING
+Horário de término da votação, no formato YYYYMMDDHHMM

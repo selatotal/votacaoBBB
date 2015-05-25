@@ -197,7 +197,14 @@ hr.style-one {
 	z-index: 10000;
 	bottom: -30px;
 	left: 239px;
+	color: #c6c6c6;
+	font-size: 0.7em;
 	text-align: center;
+}
+
+#remainingTime {
+	color: orange;
+	font-size: 2.5em;
 }
 
 .percentual {

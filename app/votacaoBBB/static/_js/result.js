@@ -8,7 +8,7 @@ var pad = function(number){
 	return myPad.substring(0, myPad.length - str.length) + str;
 }
 
-var myCounter = function(){
+var myCounter = function(endingTime){
 
 	var countdownType = countdown.HOURS | countdown.MINUTES | countdown.SECONDS;
 	countdown.setLabels(
@@ -17,7 +17,7 @@ var myCounter = function(){
 		null,
 		null,
 		'Now.');
-	var timespan = countdown(new Date(2015, 4, 25),
+	var timespan = countdown(endingTime,
 		function(ts) {
 			document.getElementById('remainingTime').innerHTML = ts.hours+":"+pad(ts.minutes)+":"+pad(ts.seconds);	
 		},
@@ -37,4 +37,6 @@ var goHome = function(){
  * Start counter
  */
 
-myCounter();
+if (endingTime){
+	myCounter(endingTime);	
+}
