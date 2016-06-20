@@ -1,18 +1,3 @@
-## Exercícios de Lógica de Programação
-* Escolhi fazer em Java porque já tinha o ambiente pronto.
-* Para compilar, basta realizar a compilação, conforme abaixo:
-```
-javac Collatz.java SubCadeia.java
-```
-* Para executar, basta executar a classe escolhida, conforme abaixo:
-```
-java Collatz
-```
-
-```
-java SubCadeia
-```
-
 ## Arquitetura
 
 ===============================
@@ -42,32 +27,6 @@ java SubCadeia
 :* Mas se não colocar, é necessário para que, caso o serviço caia, possa ser reiniciado
 * Troca do SQLite3 para um NoSQL
 :* Creio que melhoraria a capacidade de atendimento, principalmente para o caso de mais de um servidor (neste caso seria praticamente obrigatório)
-
-### Coisas que farei após a entrega (mesmo que não passe)
-Como combinei o prazo de entrega para o dia 25/05, algumas coisas não puderam ser realizadas devido ao tempo disponível que eu tinha para desenvolver a aplicação (junto com o serviço atual e as aulas na faculdade), assim priorizei o desenvolvimento funcional da aplicação.
-* Testes: automatização dos testes de Front-End via Selenium/Jasmine/PhantomJS e do backend via Python Unittest 
-* Melhoria do Layout. Tentei priorizar ao máximo o design da aplicação mas ainda tem pequenos pontos do design que não ficaram igual ao layout apresentado (fontes, separadores, etc.).
-
-## Considerações
-
-===============================
-#### Cronograma Macro
-1. Protótipo 20/05 (tela e votação)
-2. Segurança da votação (recaptcha) 22/05
-3. URLs de administração 24/05
-
-===============================
-#### Cronograma Detalhado
-1. Montagem layout tela votação - término em 15/05
-2. Montagem layout tela resultado - término em 19/05
-3. Elaboração modelo URLs - término em 19/05
-4. Criação testes Flask - testes de carga em 20/05
-5. Criação modelos Flask - término em 19/05
-6. Criação métodos Flask - término em 19/05
-7. Integração tela/votação - término em 19/05
-8. Criação testes Flask administração
-9. Criação métodos Flask administração
-10. Telas administração - término em 24/05
 
 ===============================
 #### Fluxo
